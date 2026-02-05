@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposition Disruptions Quick Reference</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #7a93ac;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 1000px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2d3e50;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 10px;
+            border-bottom: 3px solid #e2e8f0;
+            margin-bottom: 30px;
+        }
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #666;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: -3px;
+        }
+        .tab-button:hover {
+            color: #2d3e50;
+            background: #f8f9fa;
+        }
+        .tab-button.active {
+            color: #d4a574;
+            border-bottom-color: #d4a574;
+            background: #fff;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .scenario-header {
+            background: linear-gradient(135deg, #7a93ac 0%, #5a7388 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        .scenario-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .scenario-description {
+            font-size: 15px;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+        
+        .critical-alert {
+            background: #fff5f5;
+            border: 2px solid #f56565;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        .critical-alert-title {
+            color: #f56565;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .critical-alert-title::before {
+            content: "!";
+            background: #f56565;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .critical-alert-text {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .protocol-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #d4a574;
+        }
+        .protocol-section-title {
+            color: #2d3e50;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .protocol-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .protocol-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #333;
+            line-height: 1.6;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .protocol-list li:last-child {
+            border-bottom: none;
+        }
+        .protocol-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #d4a574;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .protocol-list li strong {
+            color: #2d3e50;
+        }
+        
+        .info-box {
+            background: #e6f3ff;
+            border: 2px solid #7a93ac;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .info-box-title {
+            color: #2d3e50;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .info-box-text {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .tab-button {
+                font-size: 14px;
+                padding: 12px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Deposition Disruptions Quick Reference</h1>
+        <p class="subtitle">Review protocols for transfers, suspended depositions, and CNAs</p>
+        
+        <div style="text-align: center; margin-bottom: 25px;">
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; display: inline-block; border: 2px solid #e2e8f0;">
+                <div style="color: #2d3e50; font-weight: 600; margin-bottom: 10px; font-size: 14px;">📚 Full Documentation on Guru</div>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                    <a href="https://app.getguru.com/card/TaezpAMc/Depo-Transfers-What-You-Need-To-Know" target="_blank" style="color: #7a93ac; text-decoration: underline; font-size: 13px; font-weight: 600; padding: 5px 10px; background: white; border-radius: 4px; border: 1px solid #7a93ac; transition: all 0.2s;">Deposition Transfers →</a>
+                    <a href="https://app.getguru.com/card/TKX9dxEc/Suspended-Depositions-Overview" target="_blank" style="color: #7a93ac; text-decoration: underline; font-size: 13px; font-weight: 600; padding: 5px 10px; background: white; border-radius: 4px; border: 1px solid #7a93ac; transition: all 0.2s;">Suspended Depositions →</a>
+                    <a href="https://app.getguru.com/card/c87eEdgi/Handling-a-Protective-Order-During-a-Deposition" target="_blank" style="color: #7a93ac; text-decoration: underline; font-size: 13px; font-weight: 600; padding: 5px 10px; background: white; border-radius: 4px; border: 1px solid #7a93ac; transition: all 0.2s;">Protective Orders →</a>
+                    <a href="https://app.getguru.com/card/iEe6XybT/Certificate-of-NonAppearance-CNA-Overview" target="_blank" style="color: #7a93ac; text-decoration: underline; font-size: 13px; font-weight: 600; padding: 5px 10px; background: white; border-radius: 4px; border: 1px solid #7a93ac; transition: all 0.2s;">CNAs →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="switchTab('transfers')">Deposition Transfers</button>
+            <button class="tab-button" onclick="switchTab('suspended')">Suspended Depos & Protective Orders</button>
+            <button class="tab-button" onclick="switchTab('cna')">CNAs</button>
+        </div>
+        
+        <!-- Transfers Tab -->
+        <div id="transfers" class="tab-content active">
+            <div class="scenario-header">
+                <div class="scenario-title">Deposition Transfers</div>
+                <div class="scenario-description">
+                    Taking over a job from another videographer, either before it starts (Pre-Depo) or mid-deposition (Mid-Depo)
+                </div>
+            </div>
+            
+            <div class="critical-alert">
+                <div class="critical-alert-title">Most Common Mistake</div>
+                <div class="critical-alert-text">
+                    Departing videographers forget to upload their OBS backup to the shared folder or label it incorrectly. The replacement vid can't complete the worksheet without these files!
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-box-title">Understanding Transfer Types</div>
+                <div class="info-box-text">
+                    <strong>Pre-Depo Transfer:</strong> Taking over before deposition starts - handled like standard job with shorter notice (can clock in 15 min prior)<br><br>
+                    <strong>Mid-Depo Transfer:</strong> Taking over during in-progress deposition - Video Scheduling & Depo Support will call for availability confirmation first
+                </div>
+            </div>
+
+            <div class="critical-alert">
+                <div class="critical-alert-title">Need to Transfer Out Mid-Deposition?</div>
+                <div class="critical-alert-text">
+                    If you have a hard-stop or need someone to take your place during a deposition, contact #video-help at least one hour before you need to leave. In case of emergency, contact them as soon as possible.
+                </div>
+            </div>
+            
+            <div class="protocol-section">
+                <div class="protocol-section-title">Protocols for Transferring Out (Departing Vid)</div>
+                <ul class="protocol-list">
+                    <li>Post all relevant info to the replacement in #depo-transfer Slack thread</li>
+                    <li>Confirm replacement is in the room, assigned as host, and has started their OBS backup</li>
+                    <li>If on record, announce the replacement during a break and introduce them to attorneys, CR, and witness</li>
+                    <li>Save your work before pressing TRANSFER (you'll lose dashboard access immediately)</li>
+                    <li>Confirm replacement can access the Worksheet before leaving</li>
+                    <li>Continue running OBS backup until new vid fully takes over</li>
+                    <li>For REA jobs: confirm all exhibits are uploaded prior to transfer</li>
+                    <li><strong>Label your OBS file:</strong> Job number - Witness Name - Part # - date - obs.raw</li>
+                    <li><strong>Upload backup to the shared folder:</strong> Backup Upload Folder</li>
+                </ul>
+            </div>
+            
+            <div class="protocol-section">
+                <div class="protocol-section-title">Protocols for Taking Over (Replacement Vid)</div>
+                <ul class="protocol-list">
+                    <li>Monitor Slack in #depo-transfer for updates and instructions</li>
+                    <li>Join depo room at communicated time and start OBS backup immediately</li>
+                    <li>Coordinate with outgoing vid to confirm completed tasks (SC App walkthrough, CR preferences, etc.)</li>
+                    <li>Clarify roles of all participants in the room</li>
+                    <li>Wait for host transfer and verify worksheet access (In Progress tab → locate by job number)</li>
+                    <li>Post your name, role, and phone number in room chat for participants</li>
+                    <li>Update "Your Name" and "Your Email" fields in Job Information section</li>
+                    <li>Attach outgoing vid's backup files from shared folder to your worksheet</li>
+                    <li>Delete uploaded files from shared folder after attaching to worksheet</li>
+                    <li>Click "Transfer Complete" button in Slack thread</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Suspended Tab -->
+        <div id="suspended" class="tab-content">
+            <div class="scenario-header">
+                <div class="scenario-title">Suspended Depositions & Protective Orders</div>
+                <div class="scenario-description">
+                    Deposition temporarily halted so a party can seek a court order - often a protective order that blocks testimony to prevent harassment, embarrassment, or undue burden
+                </div>
+            </div>
+            
+            <div class="critical-alert">
+                <div class="critical-alert-title">When Counsel Disagrees About Suspending</div>
+                <div class="critical-alert-text">
+                    If counsel disagrees about suspending, contact #video-help immediately to reach Carly Savar (General Counsel). Always follow attorneys' lead - continue on record if no agreement until protective order or agreement is reached.
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-box-title">What's the Difference?</div>
+                <div class="info-box-text">
+                    <strong>Canceled/Rescheduled:</strong> Due to logistical issues (participant absence, missing documents)<br><br>
+                    <strong>Suspended:</strong> Specifically halted to seek court order, often after dispute between counsel regarding witness privacy or harassment
+                </div>
+            </div>
+
+            <div class="protocol-section">
+                <div class="protocol-section-title">What Is a Protective Order?</div>
+                <ul class="protocol-list">
+                    <li>A legal "stop button" that blocks testimony if an attorney believes answering would cause embarrassment, harassment, undue burden, or expense</li>
+                    <li>Prevents the disclosure of certain information under certain circumstances</li>
+                    <li>The magic words that halt proceedings: <strong>"I would like to go off the record so that we may seek a protective order"</strong></li>
+                    <li>Once these words are said, immediately stop taking testimony and go off the record</li>
+                </ul>
+            </div>
+
+            <div class="protocol-section">
+                <div class="protocol-section-title">Venue-Specific Rules for Protective Orders</div>
+                <ul class="protocol-list">
+                    <li><strong>Texas:</strong> Both sides (Taking Attorney and Opposing Counsel) must agree to go off the record OR have a court order</li>
+                    <li><strong>California:</strong> If a lawyer suspends to seek a protective order (citing bad faith or harassment), you may go off the record once that lawyer exits and the CR goes off the record</li>
+                    <li><strong>Other States (General Rule):</strong> Either side's request to seek a protective order will stop the deposition immediately</li>
+                </ul>
+            </div>
+            
+            <div class="protocol-section">
+                <div class="protocol-section-title">When a Protective Order Is Requested</div>
+                <ul class="protocol-list">
+                    <li>Immediately stop taking testimony from the witness</li>
+                    <li>Do not ask any questions about case matters on the record after this statement</li>
+                    <li>Go off the record immediately and suspend the deposition</li>
+                    <li>Note: Counsel may still make statements about the Protective Order on the record afterward</li>
+                    <li>Follow the CR's lead throughout the process</li>
+                </ul>
+            </div>
+
+            <div class="protocol-section">
+                <div class="protocol-section-title">Videographer Actions for Protective Orders</div>
+                <ul class="protocol-list">
+                    <li>Immediately announce: <strong>"WE ARE NOW OFF THE RECORD. THE TIME IS [TIME/TIMEZONE]"</strong></li>
+                    <li>Follow the CR's lead</li>
+                    <li>If counsel requests to make statements on the record about the Protective Order, go back on the record to allow statements, then take the deposition back off the record</li>
+                    <li>Notate on your worksheet in Review Job Information Additional Notes: "Counsel asked for a protective order at [TIME] and we immediately went off the record and ended the deposition, no read-off was said"</li>
+                    <li>Facilitate everyone's departure from the meeting as usual</li>
+                </ul>
+            </div>
+
+            <div class="protocol-section">
+                <div class="protocol-section-title">If a Protective Order Already Exists</div>
+                <ul class="protocol-list">
+                    <li>If attorneys ask you not to take video orders because a protective order already exists, remain calm and wait for input from the CR</li>
+                    <li>Advise counsel that Steno will comply with the protective order</li>
+                    <li>Direct them to email the protective order to concierge@steno.com</li>
+                    <li>Notate all relevant information regarding the protective order in your Video Worksheet for future reference</li>
+                </ul>
+            </div>
+
+            <div class="protocol-section">
+                <div class="protocol-section-title">Handling Unclear Situations</div>
+                <ul class="protocol-list">
+                    <li>If the situation is uncertain (e.g., one lawyer leaves and the other refuses to engage), immediately contact #video-help for guidance</li>
+                    <li>If the CR has left and counsel acts unreasonably or in bad faith, it is acceptable to end the session</li>
+                </ul>
+            </div>
+            
+            <div class="protocol-section">
+                <div class="protocol-section-title">Post-Deposition Worksheet</div>
+                <ul class="protocol-list">
+                    <li>Note "Deposition suspended to seek a protective order" on video worksheet</li>
+                    <li>Add any relevant details in internal Videographer service notes box</li>
+                    <li>Complete all other post-depo tasks as usual unless otherwise instructed</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- CNA Tab -->
+        <div id="cna" class="tab-content">
+            <div class="scenario-header">
+                <div class="scenario-title">CNAs (Certificate of Non-Appearance)</div>
+                <div class="scenario-description">
+                    Formal document certifying that a scheduled deponent failed to appear - used as evidence when filing motions
+                </div>
+            </div>
+            
+            <div class="critical-alert">
+                <div class="critical-alert-title">Critical Documentation Requirement</div>
+                <div class="critical-alert-text">
+                    In the Additional Notes section of your worksheet, you MUST specify either <strong>"#CNA with video"</strong> or <strong>"#CNA no video"</strong>. Just writing "#CNA" is not sufficient.
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-box-title">When Does a CNA Happen?</div>
+                <div class="info-box-text">
+                    If opposing counsel or the deponent is absent past the deposition start time, it might be a CNA. Always confirm with the Taking Attorney on how to proceed.
+                </div>
+            </div>
+            
+            <div class="protocol-section">
+                <div class="protocol-section-title">CNA WITH Video Orders</div>
+                <ul class="protocol-list">
+                    <li>Ask counsel if they want the full official read-on</li>
+                    <li>If yes, read the script from your worksheet but <strong>OMIT</strong> the line about swearing in the witness (no witness present)</li>
+                    <li>Instead close with: "Thank you, counsel, you may proceed."</li>
+                    <li>If counsel doesn't want full read-on, adjust per their instructions</li>
+                    <li>When counsel finishes, close with: "This concludes today's proceedings in the matter of [CASE NAME]. We are now off the record. The time is [HH:MM TIME ZONE]."</li>
+                </ul>
+            </div>
+            
+            <div class="protocol-section">
+                <div class="protocol-section-title">CNA WITHOUT Video Orders</div>
+                <ul class="protocol-list">
+                    <li>Do NOT read the proceeding on the record (no official read-on)</li>
+                    <li>Allow counsel to give their statement with the Court Reporter</li>
+                    <li>Stay in remote meeting until all statements are complete and participants have left</li>
+                </ul>
+            </div>
+            
+            <div class="protocol-section">
+                <div class="protocol-section-title">Completing Your Worksheet</div>
+                <ul class="protocol-list">
+                    <li>Select <strong>"Yes"</strong> for "Is this a CNA job?" (automatically updates service to CNA)</li>
+                    <li>Minimum billable hours should be 1 hour</li>
+                    <li>Add exhibits if presented (e.g., Notice of Deposition), otherwise check "No exhibits marked"</li>
+                    <li>If counsel declined video, check "No orders requested"</li>
+                    <li><strong>In Additional Notes, specify "#CNA with video" or "#CNA no video"</strong></li>
+                    <li>If backup exists and no video was ordered, delete file from AWS</li>
+                    <li>Complete remaining post-deposition tasks and submit worksheet</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-box-title">Important Reminders</div>
+                <div class="info-box-text">
+                    • Do NOT read General Recommendations for CNAs<br>
+                    • Only post in #video-help if it was contentious or a rescheduled date was given<br>
+                    • Do NOT post directly in #scheduling for CNA results
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activate clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
